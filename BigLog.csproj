@@ -8,6 +8,44 @@
     <Authors>faolanbig</Authors>
     <Description>an easy to use yet highly extensible logging library with support of logging to log files, the terminal output, a similar output or to a server via various protocols</Description>
     <Copyright>© 2025 Carl Öttinger</Copyright>
+    <PackageProjectUrl>biglog.bigvault.cloud</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>logging.png</PackageIcon>
+    <RepositoryUrl>https://github.com/FaolanBig/BigLog</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>log; logging; logger; biglog</PackageTags>
+    <PackageReleaseNotes>init</PackageReleaseNotes>
+    <PackAsTool>False</PackAsTool>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>False</IncludeSymbols>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <ApplicationIcon>logging.ico</ApplicationIcon>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="logging.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Downloads\logging.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
