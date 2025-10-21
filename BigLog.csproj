@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Title>BigLog</Title>
+    <Authors>faolanbig</Authors>
+    <Description>an easy to use yet highly extensible logging library with support of logging to log files, the terminal output, a similar output or to a server via various protocols</Description>
+    <Copyright>© 2025 Carl Öttinger</Copyright>
+  </PropertyGroup>
+
+</Project>
