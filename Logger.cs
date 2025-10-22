@@ -10,7 +10,7 @@ namespace BigLog
     public class Logger
     {
         // constructor
-        public Logger() 
+        public Logger()
         {
             ColorArr = [
                 ColorInf,
@@ -27,7 +27,7 @@ namespace BigLog
                 PrefixCustom
                 ];
         }
-        public Logger(Logger loggerImport) 
+        public Logger(Logger loggerImport)
         {
             // color import
             ColorInf = loggerImport.ColorInf;
@@ -69,11 +69,18 @@ namespace BigLog
         public static readonly ConsoleColor ColorErr_default = ConsoleColor.Red;
         public static readonly ConsoleColor ColorCustom_default = ConsoleColor.Magenta;
 
-        public ConsoleColor ColorInf = ColorInf_default;
-        public ConsoleColor ColorSuc = ColorSuc_default;
-        public ConsoleColor ColorWar = ColorWar_default;
-        public ConsoleColor ColorErr = ColorErr_default;
-        public ConsoleColor ColorCustom = ColorCustom_default;
+        private ConsoleColor colorInf = ColorInf_default;
+        private ConsoleColor colorSuc = ColorSuc_default;
+        private ConsoleColor colorWar = ColorWar_default;
+        private ConsoleColor colorErr = ColorErr_default;
+        private ConsoleColor colorCustom = ColorCustom_default;
+        public ConsoleColor ColorInf { get => colorInf; set { colorInf = value; updateColorArr(); } }
+        public ConsoleColor ColorSuc { get => colorSuc; set { colorSuc = value; updateColorArr(); } }
+        public ConsoleColor ColorWar { get => colorWar; set { colorWar = value; updateColorArr(); } }
+        public ConsoleColor ColorErr { get => colorErr; set { colorErr = value; updateColorArr(); } }
+        public ConsoleColor ColorCustom { get => colorCustom; set => colorCustom = value; }
+
+
         internal ConsoleColor[] ColorArr = new ConsoleColor[5];
 
         private bool enableDefaultColors = false;
@@ -121,11 +128,17 @@ namespace BigLog
         public static readonly string PrefixErr_default_long = "error";
         public static readonly string PrefixCustom_default_long = "custom";
 
-        public string PrefixInf = PrefixInf_default_short;
-        public string PrefixSuc = PrefixSuc_default_short;
-        public string PrefixWar = PrefixWar_default_short;
-        public string PrefixErr = PrefixErr_default_short;
-        public string PrefixCustom = PrefixCustom_default_short;
+        private string prefixInf = PrefixInf_default_short;
+        private string prefixSuc = PrefixSuc_default_short;
+        private string prefixWar = PrefixWar_default_short;
+        private string prefixErr = PrefixErr_default_short;
+        private string prefixCustom = PrefixCustom_default_short;
+        public string PrefixInf { get => prefixInf; set { prefixInf = value; updatePrefixArr(); } }
+        public string PrefixSuc { get => prefixSuc; set { prefixSuc = value; updatePrefixArr(); } }
+        public string PrefixWar { get => prefixWar; set { prefixWar = value; updatePrefixArr(); } }
+        public string PrefixErr { get => prefixErr; set { prefixErr = value; updatePrefixArr(); } }
+        public string PrefixCustom { get => prefixCustom; set => prefixCustom = value; }
+
 
         internal string[] prefixArr = new string[5];
 
@@ -140,6 +153,8 @@ namespace BigLog
                     useShortPrefix = value;
             }
         }
+
+
         public bool PrintTimeStamp = true;
         public bool PrintTimeStampBeforeLevel = true;
         private void setPrefix_short()
@@ -158,17 +173,7 @@ namespace BigLog
             PrefixErr = PrefixErr_default_long;
             PrefixCustom = PrefixCustom_default_long;
         }
-        private void refreshPrefixArr()
-        {
-            prefixArr = [
-                PrefixInf,
-                PrefixSuc,
-                PrefixWar,
-                PrefixErr,
-                PrefixCustom
-                ];
-        }
-        private void refreshColorArr()
+        private void updateColorArr()
         {
             ColorArr = [
                 ColorInf,
@@ -176,6 +181,16 @@ namespace BigLog
                 ColorWar,
                 ColorErr,
                 ColorCustom
+                ];
+        }
+        private void updatePrefixArr()
+        {
+            prefixArr = [
+                PrefixInf,
+                PrefixSuc,
+                PrefixWar,
+                PrefixErr,
+                PrefixCustom
                 ];
         }
         // printing text
