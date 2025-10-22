@@ -63,16 +63,16 @@ namespace BigLog
                 setDefaultColors_fallback();
             }
         }
+        public static readonly ConsoleColor ColorInf_default = ConsoleColor.White;
         public static readonly ConsoleColor ColorSuc_default = ConsoleColor.Green;
         public static readonly ConsoleColor ColorWar_default = ConsoleColor.Yellow;
         public static readonly ConsoleColor ColorErr_default = ConsoleColor.Red;
-        public static readonly ConsoleColor ColorInf_default = ConsoleColor.White;
         public static readonly ConsoleColor ColorCustom_default = ConsoleColor.Magenta;
 
-        public ConsoleColor ColorInf = ColorSuc_default;
-        public ConsoleColor ColorSuc = ColorWar_default; //success
-        public ConsoleColor ColorWar = ColorErr_default; //warning
-        public ConsoleColor ColorErr = ColorInf_default;
+        public ConsoleColor ColorInf = ColorInf_default;
+        public ConsoleColor ColorSuc = ColorSuc_default;
+        public ConsoleColor ColorWar = ColorWar_default;
+        public ConsoleColor ColorErr = ColorErr_default;
         public ConsoleColor ColorCustom = ColorCustom_default;
         internal ConsoleColor[] ColorArr = new ConsoleColor[5];
 
@@ -158,7 +158,26 @@ namespace BigLog
             PrefixErr = PrefixErr_default_long;
             PrefixCustom = PrefixCustom_default_long;
         }
-
+        private void refreshPrefixArr()
+        {
+            prefixArr = [
+                PrefixInf,
+                PrefixSuc,
+                PrefixWar,
+                PrefixErr,
+                PrefixCustom
+                ];
+        }
+        private void refreshColorArr()
+        {
+            ColorArr = [
+                ColorInf,
+                ColorSuc,
+                ColorWar,
+                ColorErr,
+                ColorCustom
+                ];
+        }
         // printing text
         public void toTerm(string text)
         {
