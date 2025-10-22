@@ -10,7 +10,23 @@ namespace BigLog
     public class Logger
     {
         // constructor
-        public Logger() { }
+        public Logger() 
+        {
+            ColorArr = [
+                ColorInf,
+                ColorSuc,
+                ColorWar,
+                ColorErr,
+                ColorCustom
+                ];
+            prefixArr = [
+                PrefixInf,
+                PrefixSuc,
+                PrefixWar,
+                PrefixErr,
+                PrefixCustom
+                ];
+        }
         public Logger(Logger loggerImport) 
         {
             // color import
@@ -51,11 +67,15 @@ namespace BigLog
         public static readonly ConsoleColor ColorWar_default = ConsoleColor.Yellow;
         public static readonly ConsoleColor ColorErr_default = ConsoleColor.Red;
         public static readonly ConsoleColor ColorInf_default = ConsoleColor.White;
+        public static readonly ConsoleColor ColorCustom_default = ConsoleColor.Magenta;
 
         public ConsoleColor ColorInf = ColorSuc_default;
         public ConsoleColor ColorSuc = ColorWar_default; //success
         public ConsoleColor ColorWar = ColorErr_default; //warning
         public ConsoleColor ColorErr = ColorInf_default;
+        public ConsoleColor ColorCustom = ColorCustom_default;
+        internal ConsoleColor[] ColorArr = new ConsoleColor[5];
+
         private bool enableDefaultColors = false;
         public bool EnableDefaultColors
         {
@@ -93,16 +113,21 @@ namespace BigLog
         public static readonly string PrefixSuc_default_short = "suc";
         public static readonly string PrefixWar_default_short = "war";
         public static readonly string PrefixErr_default_short = "err";
+        public static readonly string PrefixCustom_default_short = "ctm";
 
         public static readonly string PrefixInf_default_long = "info";
         public static readonly string PrefixSuc_default_long = "success";
         public static readonly string PrefixWar_default_long = "warning";
         public static readonly string PrefixErr_default_long = "error";
+        public static readonly string PrefixCustom_default_long = "custom";
 
         public string PrefixInf = PrefixInf_default_short;
         public string PrefixSuc = PrefixSuc_default_short;
         public string PrefixWar = PrefixWar_default_short;
         public string PrefixErr = PrefixErr_default_short;
+        public string PrefixCustom = PrefixCustom_default_short;
+
+        internal string[] prefixArr = new string[5];
 
         private bool useShortPrefix = true;
         public bool UseShortPrefix
@@ -123,6 +148,7 @@ namespace BigLog
             PrefixSuc = PrefixSuc_default_short;
             PrefixWar = PrefixWar_default_short;
             PrefixErr = PrefixErr_default_short;
+            PrefixCustom = PrefixCustom_default_short;
         }
         private void setPrefix_long()
         {
@@ -130,6 +156,7 @@ namespace BigLog
             PrefixSuc = PrefixSuc_default_long;
             PrefixWar = PrefixWar_default_long;
             PrefixErr = PrefixErr_default_long;
+            PrefixCustom = PrefixCustom_default_long;
         }
 
         // printing text
