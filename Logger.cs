@@ -44,6 +44,68 @@ namespace BigLog
             PrefixErr = loggerImport.PrefixErr;
         }
 
+        ////////////////////
+        /// GENERAL-ZONE ///
+        ////////////////////
+        
+        private bool useTerminal = false;
+        public bool UseTerminal
+        {
+            get { return useTerminal; }
+            set
+            {
+                if (value) 
+                { 
+                    useDefinitive = false;
+                    useFile = false;
+                }
+                else
+                {
+                    useDefinitive = false;
+                    useTerminal = true;
+                }
+                useTerminal = value;
+            }
+        }
+        private bool useFile = false;
+        public bool UseFile
+        {
+            get { return useFile; }
+            set
+            {
+                if (value)
+                {
+                    useDefinitive = false;
+                    useTerminal = false;
+                }
+                else
+                {
+                    useDefinitive = false;
+                    useTerminal = true;
+                }
+                useFile = value;
+            }
+        }
+        private bool useDefinitive = true;
+        public bool UseDefinitive
+        {
+            get { return useDefinitive; }
+            set
+            {
+                if (value)
+                {
+                    useTerminal = false;
+                    useFile = false;
+                }
+                else
+                {
+                    useTerminal = true;
+                    useFile = false;
+                }
+                useDefinitive = value;
+            }
+        }
+
         //////////////////////////////
         /// PRINTING-ZONE-TERMINAL ///
         //////////////////////////////
