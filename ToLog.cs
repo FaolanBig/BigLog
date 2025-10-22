@@ -16,8 +16,15 @@ namespace BigLog
             ColorSuc = loggerImport.ColorSuc;
             ColorWar = loggerImport.ColorWar;
             ColorErr = loggerImport.ColorErr;
+            Color_fallback = loggerImport.Color_fallback;
+            EnableDefaultColors = loggerImport.EnableDefaultColors;
         }
 
+
+          ///////////////////
+         /// COLOR-ZONE ////
+        ///////////////////
+        
         private ConsoleColor color_fallback = ConsoleColor.White;
         public ConsoleColor Color_fallback
         {
@@ -28,7 +35,7 @@ namespace BigLog
                 setDefaultColors_fallback();
             }
         }
-        public readonly ConsoleColor ColorSuc_default = ConsoleColor.Green; 
+        public readonly ConsoleColor ColorSuc_default = ConsoleColor.Green;
         public readonly ConsoleColor ColorWar_default = ConsoleColor.Yellow;
         public readonly ConsoleColor ColorErr_default = ConsoleColor.Red;
         public readonly ConsoleColor ColorInf_default = ConsoleColor.White;
@@ -72,6 +79,5 @@ namespace BigLog
             ColorWar = color_fallback;
             ColorErr = color_fallback;
         }
-
     }
 }
