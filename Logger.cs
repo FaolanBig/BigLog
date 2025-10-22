@@ -79,5 +79,25 @@ namespace BigLog
             ColorWar = color_fallback;
             ColorErr = color_fallback;
         }
+
+
+          //////////////////////////////
+         /// PRINTING-ZONE-TERMINAL ///
+        //////////////////////////////
+        
+        public void toTerm(string text)
+        {
+            PrintToTerminal.ToTerm(this, text);
+        }
+
+
+          /////////////////////////
+         /// PRINTING-ZONE-FILE //
+        /////////////////////////
+        
+        public void toFile(string text)
+        {
+            PrintToFile.ToFile(this, text);
+        }
     }
 }
