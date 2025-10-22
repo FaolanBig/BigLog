@@ -12,5 +12,9 @@ namespace BigLog
         {
 
         }
+        internal static void ToTerm(Logger logger, Exception ex)
+        {
+
+        }
     }
 }

@@ -12,5 +12,9 @@ namespace BigLog
         {
 
         }
+        internal static void ToFile(Logger logger, Exception ex)
+        {
+
+        }
     }
 }

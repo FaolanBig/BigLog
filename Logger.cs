@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BigLog
 {
@@ -131,18 +132,31 @@ namespace BigLog
             PrefixErr = PrefixErr_default_long;
         }
 
+        // printing text
         public void toTerm(string text)
         {
             PrintToTerminal.ToTerm(this, text);
+        }
+
+        // printing exceptions
+        public void toTerm(Exception ex)
+        {
+            PrintToTerminal.ToTerm(this, ex);
         }
 
         //////////////////////////
         /// PRINTING-ZONE-FILE ///
         //////////////////////////
 
+        // printing text
         public void toFile(string text)
         {
             PrintToFile.ToFile(this, text);
+        }
+        // printing exceptions
+        public void toFile(Exception ex)
+        {
+            PrintToFile.ToFile(this, ex);
         }
     }
 }
