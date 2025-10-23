@@ -229,7 +229,7 @@ namespace BigLog
 
         public bool PrintTimeStamp = true;
         public bool PrintTimeStampBeforeLevel = true;
-        public string TimeFormat = "yyyy-MM-dd HH:mm:ss.ffff K";
+        public string TimeFormat = "yyyy-MM-dd HH:mm:ss.ffff K"; // refer to https://www.c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1
         public string TimeStampPrefix = "log: ";
         private void setPrefix_short()
         {
