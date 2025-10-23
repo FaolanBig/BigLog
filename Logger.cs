@@ -185,7 +185,7 @@ namespace BigLog
         /// FORMAT-ZONE ///
         ///////////////////
 
-        public static readonly string PrePrefix_default = "logger: ";
+        public static readonly string PrePrefix_default = "::";
         public string PrePrefix = PrePrefix_default;
 
         public static readonly string PrefixInf_default_short = "inf";
@@ -229,6 +229,8 @@ namespace BigLog
 
         public bool PrintTimeStamp = true;
         public bool PrintTimeStampBeforeLevel = true;
+        public string TimeFormat = "yyyy-MM-dd HH:mm:ss.ffff K";
+        public string TimeStampPrefix = "log: ";
         private void setPrefix_short()
         {
             PrefixInf = PrefixInf_default_short;
