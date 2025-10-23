@@ -47,6 +47,8 @@ namespace BigLog
         ////////////////////
         /// GENERAL-ZONE ///
         ////////////////////
+
+        public bool useTerminalAsFAllback = true; // when set to false, logging to file will be used as fallback
         
         private bool useTerminal = false;
         public bool UseTerminal
@@ -99,8 +101,16 @@ namespace BigLog
                 }
                 else
                 {
-                    useTerminal = true;
-                    useFile = false;
+                    if (useTerminalAsFAllback)
+                    {
+                        useTerminal = true;
+                        useFile = false;
+                    }
+                    else
+                    {
+                        useTerminal = false;
+                        useFile = true;
+                    }
                 }
                 useDefinitive = value;
             }
