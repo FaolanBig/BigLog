@@ -9,13 +9,46 @@ namespace BigLog
     internal class PrintToTerminal
     {
         // level: 0 = inf, 1 = success, 2 = warning, 3 = error, 4 = custom
-        internal static void ToTerm(Logger logger, string text, int level = 0)
+        internal static void ToTerm(Logger loggerImport, string text, int level)
         {
+            string output = loggerImport.TimeStampPrefix;
+            output += DateTime.Now.ToString(loggerImport.TimeFormat);
+            output += loggerImport.PrePrefix;
+            if (loggerImport.ColorAll)
+            {
+                output += loggerImport.prefixArr[level];
+                output += text;
+                Console.ForegroundColor = loggerImport.ColorArr[level];
+                Console.WriteLine(output);
+            }
+            else
+            {
+                Console.ForegroundColor = loggerImport.Color_fallback;
+                Console.Write(output);
 
-        }
-        internal static void ToTerm(Logger logger, Exception ex, int level = 0)
-        {
+                if (!loggerImport.ColorAll && loggerImport.ColorLevelPrefix)
+                {
+                    Console.ForegroundColor = loggerImport.ColorArr[level];
+                    Console.Write(loggerImport.prefixArr[level]);
+                }
+                else if (!loggerImport.ColorAll && !loggerImport.ColorLevelPrefix)
+                {
+                    Console.ForegroundColor = loggerImport.Color_fallback;
+                    Console.Write(loggerImport.prefixArr[level]);
+                }
 
+                if (!loggerImport.ColorAll && loggerImport.ColorMessage)
+                {
+                    Console.ForegroundColor = loggerImport.ColorArr[level];
+                    Console.WriteLine(text);
+                }
+                else if (!loggerImport.ColorAll && !loggerImport.ColorMessage)
+                {
+                    Console.ForegroundColor = loggerImport.Color_fallback;
+                    Console.WriteLine(text);
+                }
+            }
         }
+        internal static void ToTerm(Logger loggerImport, Exception ex, int level) { ToTerm(loggerImport, ex.Message, level); }
     }
 }

@@ -125,6 +125,47 @@ namespace BigLog
         /// COLOR-ZONE ///
         //////////////////
 
+        private bool colorAll = false;
+        public bool ColorAll
+        {
+            get { return colorAll; }
+            set
+            {
+                colorMessage = !value;
+                colorLevelPrefix = !value;
+                /*if (value)
+                {
+                    colorMessage = false;
+                    colorLevelPrefix = false;
+                }
+                else
+                {
+                    colorMessage = true;
+                    colorLevelPrefix = true;
+                }*/
+                colorAll = value;
+            }
+        }
+        private bool colorMessage = true;
+        public bool ColorMessage
+        {
+            get { return colorMessage; }
+            set 
+            {
+                colorAll = false; 
+                colorMessage = value; 
+            }
+        }
+        private bool colorLevelPrefix = false;
+        public bool ColorLevelPrefix
+        {
+            get { return colorLevelPrefix; }
+            set 
+            {
+                colorAll = false; 
+                colorLevelPrefix = value; 
+            }
+        }
         private ConsoleColor color_fallback = ConsoleColor.White;
         public ConsoleColor Color_fallback
         {
@@ -150,7 +191,7 @@ namespace BigLog
         public ConsoleColor ColorSuc { get => colorSuc; set { colorSuc = value; updateColorArr(); } }
         public ConsoleColor ColorWar { get => colorWar; set { colorWar = value; updateColorArr(); } }
         public ConsoleColor ColorErr { get => colorErr; set { colorErr = value; updateColorArr(); } }
-        public ConsoleColor ColorCustom { get => colorCustom; set => colorCustom = value; }
+        public ConsoleColor ColorCustom { get => colorCustom; set { colorCustom = value; updateColorArr(); } }
 
 
         internal ConsoleColor[] ColorArr = new ConsoleColor[5];
@@ -185,20 +226,21 @@ namespace BigLog
         /// FORMAT-ZONE ///
         ///////////////////
 
-        public static readonly string PrePrefix_default = "logger: ";
+        public static readonly string PrePrefix_default = " :: "; // string between timestamp and level prefix + remember the spaces :3
         public string PrePrefix = PrePrefix_default;
 
-        public static readonly string PrefixInf_default_short = "inf";
-        public static readonly string PrefixSuc_default_short = "suc";
-        public static readonly string PrefixWar_default_short = "war";
-        public static readonly string PrefixErr_default_short = "err";
-        public static readonly string PrefixCustom_default_short = "ctm";
+        // level prefixes (short and long) + default values + remember the spaces :3
+        public static readonly string PrefixInf_default_short = "inf: ";
+        public static readonly string PrefixSuc_default_short = "suc: ";
+        public static readonly string PrefixWar_default_short = "war: ";
+        public static readonly string PrefixErr_default_short = "err: ";
+        public static readonly string PrefixCustom_default_short = "ctm: ";
 
-        public static readonly string PrefixInf_default_long = "info";
-        public static readonly string PrefixSuc_default_long = "success";
-        public static readonly string PrefixWar_default_long = "warning";
-        public static readonly string PrefixErr_default_long = "error";
-        public static readonly string PrefixCustom_default_long = "custom";
+        public static readonly string PrefixInf_default_long = "info: ";
+        public static readonly string PrefixSuc_default_long = "success: ";
+        public static readonly string PrefixWar_default_long = "warning: ";
+        public static readonly string PrefixErr_default_long = "error: ";
+        public static readonly string PrefixCustom_default_long = "custom: ";
 
         private string prefixInf = PrefixInf_default_short;
         private string prefixSuc = PrefixSuc_default_short;
@@ -209,7 +251,7 @@ namespace BigLog
         public string PrefixSuc { get => prefixSuc; set { prefixSuc = value; updatePrefixArr(); } }
         public string PrefixWar { get => prefixWar; set { prefixWar = value; updatePrefixArr(); } }
         public string PrefixErr { get => prefixErr; set { prefixErr = value; updatePrefixArr(); } }
-        public string PrefixCustom { get => prefixCustom; set => prefixCustom = value; }
+        public string PrefixCustom { get => prefixCustom; set { prefixCustom = value; updatePrefixArr(); } }
 
 
         internal string[] prefixArr = new string[5];
@@ -229,6 +271,8 @@ namespace BigLog
 
         public bool PrintTimeStamp = true;
         public bool PrintTimeStampBeforeLevel = true;
+        public string TimeFormat = "yyyy-MM-dd HH:mm:ss.ffff K"; // refer to https://www.c-sharpcorner.com/blogs/date-and-time-format-in-c-sharp-programming1
+        public string TimeStampPrefix = "log: "; // string before timestamp + remember the space ^^
         private void setPrefix_short()
         {
             PrefixInf = PrefixInf_default_short;
@@ -274,7 +318,7 @@ namespace BigLog
         // printing exceptions
         public void toTerm(Exception ex)
         {
-            PrintToTerminal.ToTerm(this, ex);
+            PrintToTerminal.ToTerm(this, ex.Message);
         }
 
         //////////////////////////
