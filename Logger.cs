@@ -125,17 +125,46 @@ namespace BigLog
         /// COLOR-ZONE ///
         //////////////////
 
-        private bool colorOnlyMessage = true; // when set to false, the entire log line will be colored (timestamp + prefix + message)
-        public bool ColorOnlyMessage
+        private bool colorAll = false;
+        public bool ColorAll
         {
-            get { return colorOnlyMessage; }
-            set { colorOnlyMessage = value; } // modify switching colorOnlyLevelPrefix accordingly
+            get { return colorAll; }
+            set
+            {
+                colorMessage = !value;
+                colorLevelPrefix = !value;
+                /*if (value)
+                {
+                    colorMessage = false;
+                    colorLevelPrefix = false;
+                }
+                else
+                {
+                    colorMessage = true;
+                    colorLevelPrefix = true;
+                }*/
+                colorAll = value;
+            }
         }
-        private bool colorOnlyLevelPrefix = false; // when set to true, only the level prefix will be colored
-        public bool ColorOnlyLevelPrefix
+        private bool colorMessage = true;
+        public bool ColorMessage
         {
-            get { return colorOnlyLevelPrefix; }
-            set { colorOnlyLevelPrefix = value; } // modify switching colorOnlyMessage accordingly
+            get { return colorMessage; }
+            set 
+            {
+                colorAll = false; 
+                colorMessage = value; 
+            }
+        }
+        private bool colorLevelPrefix = false;
+        public bool ColorLevelPrefix
+        {
+            get { return colorLevelPrefix; }
+            set 
+            {
+                colorAll = false; 
+                colorLevelPrefix = value; 
+            }
         }
         private ConsoleColor color_fallback = ConsoleColor.White;
         public ConsoleColor Color_fallback
@@ -289,7 +318,7 @@ namespace BigLog
         // printing exceptions
         public void toTerm(Exception ex)
         {
-            PrintToTerminal.ToTerm(this, ex);
+            PrintToTerminal.ToTerm(this, ex.Message);
         }
 
         //////////////////////////
