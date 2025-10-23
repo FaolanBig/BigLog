@@ -10,9 +10,21 @@ namespace BigLog
     {
         internal static string GetString(Logger loggerImport, string text, int level)
         {
-            string output;
-            string TimeStamp = DateTime.Now.ToString(loggerImport.TimeFormat);
-            
+            string output = loggerImport.TimeStampPrefix;
+            output += DateTime.Now.ToString(loggerImport.TimeFormat);
+            output += loggerImport.PrePrefix;
+            output += loggerImport.prefixArr[level];
+            output += text;
+            return output;
+        }
+        internal static string GetString(Logger loggerImport, Exception ex, int level)
+        {
+            string output = loggerImport.TimeStampPrefix;
+            output += DateTime.Now.ToString(loggerImport.TimeFormat);
+            output += loggerImport.PrePrefix;
+            output += loggerImport.prefixArr[level];
+            output += ex.Message;
+            return output;
         }
     }
 }
