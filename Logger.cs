@@ -9,6 +9,19 @@ namespace BigLog
 {
     public class Logger
     {
+        // usage: a brief test function to quickly create a logger with custom settings
+        // here is an example of how to use it:
+        /*internal void test()
+        {
+            Logger logger = new Logger()
+            {
+                LogToFile = true,
+                UseShortPrefix = true
+            };
+        }*/
+        // user manual: refer to the README.md file and the wiki in the GitHub repository found here: https://github.com/FaolanBig/BigLog
+
+
         // constructor
         public Logger()
         {
@@ -48,7 +61,20 @@ namespace BigLog
         /// GENERAL-ZONE ///
         ////////////////////
 
-        public bool useTerminalAsFAllback = true; // when set to false, logging to file will be used as fallback
+        private bool logToTerminal = true;
+        public bool LogToTerminal
+        {
+            get { return logToTerminal; }
+            set { logToTerminal = value; }
+        }
+        private bool logToFile = false;
+        public bool LogToFile
+        {
+            get { return logToFile; }
+            set { logToFile = value; }
+        }
+
+        /*public bool useTerminalAsFAllback = true; // when set to false, logging to file will be used as fallback
         
         private bool useTerminal = false;
         public bool UseTerminal
@@ -114,7 +140,7 @@ namespace BigLog
                 }
                 useDefinitive = value;
             }
-        }
+        }*/
 
         //////////////////////////////
         /// PRINTING-ZONE-TERMINAL ///
