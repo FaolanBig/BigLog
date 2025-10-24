@@ -49,6 +49,6 @@ namespace BigLog
                 }
             }
         }
-        internal static void ToTerm(Logger loggerImport, Exception ex, int level) { ToTerm(loggerImport, ex.Message, level); }
+        //internal static void ToTerm(Logger loggerImport, Exception ex, int level) { ToTerm(loggerImport, ex.Message, level); }
     }
 }
