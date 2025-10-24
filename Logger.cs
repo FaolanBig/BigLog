@@ -338,13 +338,13 @@ namespace BigLog
         // printing text
         public void toTerm(string text)
         {
-            PrintToTerminal.ToTerm(this, text);
+            //PrintToTerminal.ToTerm(this, text);
         }
 
         // printing exceptions
         public void toTerm(Exception ex)
         {
-            PrintToTerminal.ToTerm(this, ex.Message);
+            //PrintToTerminal.ToTerm(this, ex.Message);
         }
 
         //////////////////////////
