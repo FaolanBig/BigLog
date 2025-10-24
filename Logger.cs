@@ -338,6 +338,14 @@ namespace BigLog
                 ];
         }
 
+        /////////////////
+        /// FILE-ZONE ///
+        /////////////////
+
+        private string baseFilePath = AppDomain.CurrentDomain.BaseDirectory;
+        private string fileName = "log.txt";
+        private string logFilePath = "log.txt";
+
         /////////////////////
         /// PRINTING-ZONE ///
         /////////////////////
