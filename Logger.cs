@@ -335,31 +335,63 @@ namespace BigLog
                 PrefixCustom
                 ];
         }
-        // printing text
-        public void toTerm(string text)
+
+        /////////////////////
+        /// PRINTING-ZONE ///
+        /////////////////////
+
+        // text logging functions
+        public void Inf(string text)
         {
-            //PrintToTerminal.ToTerm(this, text);
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 0); }
+            if (LogToFile) { PrintToFile.ToFile(this, text, 0); }
+        }
+        public void Suc(string text)
+        {
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 1); }
+            if (LogToFile) { PrintToFile.ToFile(this, text, 1); }
+        }
+        public void War(string text)
+        {
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 2); }
+            if (LogToFile) { PrintToFile.ToFile(this, text, 2); }
+        }
+        public void Err(string text)
+        {
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 3); }
+            if (LogToFile) { PrintToFile.ToFile(this, text, 3); }
+        }
+        public void Ctm(string text)
+        {
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 4); }
+            if (LogToFile) { PrintToFile.ToFile(this, text, 4); }
         }
 
-        // printing exceptions
-        public void toTerm(Exception ex)
+        // exception logging functions
+        public void Inf(Exception ex)
         {
-            //PrintToTerminal.ToTerm(this, ex.Message);
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 0); }
+            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 0); }
         }
-
-        //////////////////////////
-        /// PRINTING-ZONE-FILE ///
-        //////////////////////////
-
-        // printing text
-        public void toFile(string text)
+        public void Suc(Exception ex)
         {
-            PrintToFile.ToFile(this, text);
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 1); }
+            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 1); }
         }
-        // printing exceptions
-        public void toFile(Exception ex)
+        public void War(Exception ex)
         {
-            PrintToFile.ToFile(this, ex);
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 2); }
+            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 2); }
+        }
+        public void Err(Exception ex)
+        {
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 3); }
+            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 3); }
+        }
+        public void Ctm(Exception ex)
+        {
+            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 4); }
+            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 4); }
         }
     }
 }
