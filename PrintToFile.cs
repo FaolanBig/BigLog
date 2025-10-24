@@ -12,11 +12,11 @@ namespace BigLog
         // level: 0 = inf, 1 = success, 2 = warning, 3 = error, 4 = custom
         internal static void ToFile(Logger loggerImport, string text, int level)
         {
-
+            
         }
-        /*internal static void ToFile(Logger loggerImport, Exception ex, int level)
+        internal static void FlushCacheToFile(Logger loggerImport, List<string> cache) 
         {
 
-        }*/
+        }
     }
 }

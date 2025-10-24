@@ -60,6 +60,13 @@ namespace BigLog
         ////////////////////
         /// GENERAL-ZONE ///
         ////////////////////
+        
+        private bool autoFlush = true; // flush every time something gets passed to BigLog. If disabled, BigLog will only flush if loggerObj.flush() is called. In the meantime logs will be stored in cache
+        public bool AutoFlush
+        {
+            get { return autoFlush; }
+            set { autoFlush = value; }
+        }
 
         private bool logToTerminal = true;
         public bool LogToTerminal
@@ -343,8 +350,45 @@ namespace BigLog
         /////////////////
 
         private string baseFilePath = AppDomain.CurrentDomain.BaseDirectory;
+        public string BaseFilePath
+        {  
+            get { return baseFilePath; } 
+            set { baseFilePath = value; }
+        }
         private string fileName = "log.txt";
-        private string logFilePath = "log.txt";
+        public string FileName
+        {
+            get { return fileName; }
+            set 
+            { 
+                fileName = value;
+                FullFilePath = Path.Combine(baseFilePath, value);
+                //FullFilePath = Path.GetFullPath(value);
+            }
+        }
+        private string fullFilePath = "log.txt";
+        public string FullFilePath
+        { 
+            get { return fullFilePath; } 
+            set { fullFilePath = Path.GetFullPath(value); }
+        }
+
+        //////////////////
+        /// CACHE-ZONE ///
+        //////////////////
+        
+        private List<string> cache = []; // if cache is used, colored output will be disabled (this shouldn't be a problem since cache and flush will mainly be used when logging to a file)
+
+        public void ClearCache() // be careful, this function will empty the cache and its action can not be undone
+        {
+            cache.Clear();
+        }
+        public void AddToCache(string text) { cache.Add(text); }
+        public void flushCache() // use this function to flush the cached logs to the logging file and/or the terminal output
+        {
+            PrintToFile.FlushCacheToFile(this, cache);
+            ClearCache();
+        }
 
         /////////////////////
         /// PRINTING-ZONE ///
@@ -353,55 +397,95 @@ namespace BigLog
         // text logging functions
         public void Inf(string text)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 0); }
-            if (LogToFile) { PrintToFile.ToFile(this, text, 0); }
+            if (autoFlush) { cache.Add(text); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 0); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, 0); }
+            }
         }
         public void Suc(string text)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 1); }
-            if (LogToFile) { PrintToFile.ToFile(this, text, 1); }
+            if (autoFlush) { cache.Add(text); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 1); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, 1); }
+            }
         }
         public void War(string text)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 2); }
-            if (LogToFile) { PrintToFile.ToFile(this, text, 2); }
+            if (autoFlush) { cache.Add(text); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 2); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, 2); }
+            }
         }
         public void Err(string text)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 3); }
-            if (LogToFile) { PrintToFile.ToFile(this, text, 3); }
+            if (autoFlush) { cache.Add(text); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 3); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, 3); }
+            }
         }
         public void Ctm(string text)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 4); }
-            if (LogToFile) { PrintToFile.ToFile(this, text, 4); }
+            if (autoFlush) { cache.Add(text); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 4); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, 4); }
+            }
         }
 
         // exception logging functions
         public void Inf(Exception ex)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 0); }
-            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 0); }
+            if (autoFlush) { cache.Add(ex.Message); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 0); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 0); }
+            }
         }
         public void Suc(Exception ex)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 1); }
-            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 1); }
+            if (autoFlush) { cache.Add(ex.Message); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 1); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 1); }
+            }
         }
         public void War(Exception ex)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 2); }
-            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 2); }
+            if (autoFlush) { cache.Add(ex.Message); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 2); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 2); }
+            }
         }
         public void Err(Exception ex)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 3); }
-            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 3); }
+            if (autoFlush) { cache.Add(ex.Message); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 3); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 3); }
+            }
         }
         public void Ctm(Exception ex)
         {
-            if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 4); }
-            if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 4); }
+            if (autoFlush) { cache.Add(ex.Message); }
+            else
+            {
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 4); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 4); }
+            }
         }
     }
 }
