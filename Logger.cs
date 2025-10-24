@@ -222,7 +222,7 @@ namespace BigLog
 
         internal ConsoleColor[] ColorArr = new ConsoleColor[5];
 
-        private bool enableDefaultColors = false;
+        private bool enableDefaultColors = true;
         public bool EnableDefaultColors
         {
             get { return enableDefaultColors; }
@@ -239,6 +239,7 @@ namespace BigLog
             ColorSuc = ColorSuc_default;
             ColorWar = ColorWar_default;
             ColorErr = ColorErr_default;
+            ColorCustom = ColorCustom_default;
         }
         private void setDefaultColors_fallback()
         {
@@ -246,6 +247,7 @@ namespace BigLog
             ColorSuc = color_fallback;
             ColorWar = color_fallback;
             ColorErr = color_fallback;
+            ColorCustom = color_fallback;
         }
 
         ///////////////////
