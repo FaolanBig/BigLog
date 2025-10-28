@@ -402,7 +402,7 @@ namespace BigLog
         {
             cache.Clear();
         }
-        public void AddToCache(string text) { cache.Add(text); }
+        public void AddToCache(string text, int level) { cache.Add(OutputFormatter.GetString(this, text, level)); } // adds text to cache and formatts them int he set manner and adds timestamps
         public void flushCache() // use this function to flush the cached logs to the logging file and/or the terminal output
         {
             PrintToFile.ToFile(this, cache);
