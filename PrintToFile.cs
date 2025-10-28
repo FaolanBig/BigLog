@@ -15,7 +15,7 @@ namespace BigLog
             FileStream fileStream = null;
             try
             {
-                fileStream = new FileStream(Path.GetFullPath(loggerImport.FileName), FileMode.OpenOrCreate);
+                fileStream = new FileStream(Path.GetFullPath(loggerImport.FileName), FileMode.Append);
                 using (StreamWriter writer = new StreamWriter(fileStream, loggerImport.UseDefaultEncoding ? Encoding.Default : loggerImport.Encoding))
                 {
                     foreach (string entry in cache)
@@ -37,7 +37,7 @@ namespace BigLog
             FileStream fileStream = null;
             try
             {
-                fileStream = new FileStream(Path.GetFullPath(loggerImport.FileName), FileMode.OpenOrCreate);
+                fileStream = new FileStream(Path.GetFullPath(loggerImport.FileName), FileMode.Append);
                 using (StreamWriter writer = new StreamWriter(fileStream, loggerImport.UseDefaultEncoding ? Encoding.Default : loggerImport.Encoding))
                 {
                     writer.WriteLine(OutputFormatter.GetString(loggerImport, text, level));
