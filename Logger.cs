@@ -402,7 +402,7 @@ namespace BigLog
         {
             cache.Clear();
         }
-        public void AddToCache(string text) { cache.Add(text); }
+        public void AddToCache(string text, int level) { cache.Add(OutputFormatter.GetString(this, text, level)); } // adds text to cache and formatts them int he set manner and adds timestamps
         public void flushCache() // use this function to flush the cached logs to the logging file and/or the terminal output
         {
             PrintToFile.ToFile(this, cache);
@@ -416,7 +416,7 @@ namespace BigLog
         // text logging functions
         public void Inf(string text)
         {
-            if (!autoFlush) { cache.Add(text); }
+            if (!autoFlush) { AddToCache(text, 0); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 0); }
@@ -425,7 +425,7 @@ namespace BigLog
         }
         public void Suc(string text)
         {
-            if (!autoFlush) { cache.Add(text); }
+            if (!autoFlush) { AddToCache(text, 1); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 1); }
@@ -434,7 +434,7 @@ namespace BigLog
         }
         public void War(string text)
         {
-            if (!autoFlush) { cache.Add(text); }
+            if (!autoFlush) { AddToCache(text, 2); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 2); }
@@ -443,7 +443,7 @@ namespace BigLog
         }
         public void Err(string text)
         {
-            if (!autoFlush) { cache.Add(text); }
+            if (!autoFlush) { AddToCache(text, 3); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 3); }
@@ -452,7 +452,7 @@ namespace BigLog
         }
         public void Ctm(string text)
         {
-            if (!autoFlush) { cache.Add(text); }
+            if (!autoFlush) { AddToCache(text, 4); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 4); }
@@ -463,7 +463,7 @@ namespace BigLog
         // exception logging functions
         public void Inf(Exception ex)
         {
-            if (!autoFlush) { cache.Add(ex.Message); }
+            if (!autoFlush) { AddToCache(ex.Message, 0); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 0); }
@@ -472,7 +472,7 @@ namespace BigLog
         }
         public void Suc(Exception ex)
         {
-            if (!autoFlush) { cache.Add(ex.Message); }
+            if (!autoFlush) { AddToCache(ex.Message, 1); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 1); }
@@ -481,7 +481,7 @@ namespace BigLog
         }
         public void War(Exception ex)
         {
-            if (!autoFlush) { cache.Add(ex.Message); }
+            if (!autoFlush) { AddToCache(ex.Message, 2); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 2); }
@@ -490,7 +490,7 @@ namespace BigLog
         }
         public void Err(Exception ex)
         {
-            if (!autoFlush) { cache.Add(ex.Message); }
+            if (!autoFlush) { AddToCache(ex.Message, 3); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 3); }
@@ -499,7 +499,7 @@ namespace BigLog
         }
         public void Ctm(Exception ex)
         {
-            if (!autoFlush) { cache.Add(ex.Message); }
+            if (!autoFlush) { AddToCache(ex.Message, 4); }
             else
             {
                 if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 4); }
