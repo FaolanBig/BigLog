@@ -349,28 +349,47 @@ namespace BigLog
         /// FILE-ZONE ///
         /////////////////
 
-        private string baseFilePath = AppDomain.CurrentDomain.BaseDirectory;
+        /*private string baseFilePath = AppDomain.CurrentDomain.BaseDirectory; // not used anymore, to set file, use the FileName property (this also works with absolute paths)
         public string BaseFilePath
         {  
             get { return baseFilePath; } 
             set { baseFilePath = value; }
-        }
+        }*/
         private string fileName = "log.txt";
         public string FileName
         {
             get { return fileName; }
             set 
-            { 
+            {
                 fileName = value;
-                FullFilePath = Path.Combine(baseFilePath, value);
+                //FullFilePath = Path.Combine(baseFilePath, value);
                 //FullFilePath = Path.GetFullPath(value);
             }
         }
-        private string fullFilePath = "log.txt";
-        public string FullFilePath
+        /*private string fullFilePath = "log.txt";
+        internal string FullFilePath
         { 
             get { return fullFilePath; } 
             set { fullFilePath = Path.GetFullPath(value); }
+        }*/
+        private bool useDefaultEncoding = true; // if true, the encoding variable below will be skipped
+        public bool UseDefaultEncoding
+        {
+            get { return useDefaultEncoding; }
+            set 
+            { 
+                useDefaultEncoding = value; 
+            }
+        }
+        private Encoding encoding = Encoding.Default; // if set, useDefaultEncoding will automatically get disabled
+        public Encoding Encoding
+        {
+            get { return encoding; }
+            set 
+            { 
+                encoding = value;
+                useDefaultEncoding = false;
+            }
         }
 
         //////////////////
@@ -386,7 +405,7 @@ namespace BigLog
         public void AddToCache(string text) { cache.Add(text); }
         public void flushCache() // use this function to flush the cached logs to the logging file and/or the terminal output
         {
-            PrintToFile.FlushCacheToFile(this, cache);
+            PrintToFile.ToFile(this, cache);
             ClearCache();
         }
 
