@@ -201,4 +201,4 @@ Logger logger = new Logger()
 ## License
 
 This project is licensed under the **Affero General Public License (AGPL)**.
-See [LICENSE](./LICENSE) for details.
+See [LICENSE](./LICENSE.txt) for details.
