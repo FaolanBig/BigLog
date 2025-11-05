@@ -152,7 +152,7 @@ Logger logger = new Logger()
 
 logger.Inf("Batch started...");
 logger.War("Minor warning...");
-logger.flushCache(); // writes all cached logs
+logger.flushCache(); // writes all cached logs and clears cache afterwards
 ```
 
 Additional cache commands:
