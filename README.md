@@ -175,14 +175,13 @@ Logger logger = new Logger()
 };
 ```
 
-**File logging without colors**
+**File logging**
 
 ```csharp
 Logger logger = new Logger()
 {
     LogToTerminal = false,
     LogToFile = true,
-    EnableDefaultColors = false
 };
 ```
 
