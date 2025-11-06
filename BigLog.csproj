@@ -8,7 +8,7 @@
     <Authors>faolanbig</Authors>
     <Description>an easy to use yet highly extensible logging library with support of logging to log files, the terminal output, a similar output or to a server via various protocols</Description>
     <Copyright>© 2025 Carl Öttinger</Copyright>
-    <PackageProjectUrl>biglog.bigvault.cloud</PackageProjectUrl>
+    <PackageProjectUrl>https://biglog.bigvault.cloud</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>logging.png</PackageIcon>
     <RepositoryUrl>https://github.com/FaolanBig/BigLog</RepositoryUrl>
