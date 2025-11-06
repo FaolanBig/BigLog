@@ -51,7 +51,7 @@ namespace BigLog
                 Console.ForegroundColor = loggerImport.ColorLevelPrefix ? loggerImport.ColorArr[level] : loggerImport.Color_fallback;
                 Console.Write(loggerImport.prefixArr[level]);
                 Console.ForegroundColor = loggerImport.ColorMessage ? loggerImport.ColorArr[level] : loggerImport.Color_fallback;
-                Console.Write(text);
+                Console.WriteLine(text);
             }
         }
         internal static void ToTerm(Logger loggerImport, List<string> cache)
