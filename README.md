@@ -201,3 +201,7 @@ Logger logger = new Logger()
 
 This project is licensed under the **GNU Affero General Public License (AGPL)**.
 See [LICENSE](./LICENSE.txt) for details.
+
+## Copyright Notice
+
+Copyright © 2025 by Carl Öttinger
