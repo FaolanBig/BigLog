@@ -25,6 +25,7 @@ namespace BigLog
         // constructor
         public Logger()
         {
+            // level-dev
             ColorArr = [
                 ColorInf,
                 ColorSuc,
@@ -32,6 +33,7 @@ namespace BigLog
                 ColorErr,
                 ColorCustom
                 ];
+            // level-dev
             prefixArr = [
                 PrefixInf,
                 PrefixSuc,
@@ -42,6 +44,7 @@ namespace BigLog
         }
         public Logger(Logger loggerImport)
         {
+            // level-dev
             // color import
             ColorInf = loggerImport.ColorInf;
             ColorSuc = loggerImport.ColorSuc;
@@ -50,6 +53,7 @@ namespace BigLog
             Color_fallback = loggerImport.Color_fallback;
             EnableDefaultColors = loggerImport.EnableDefaultColors;
 
+            // level-dev
             // format import
             PrefixInf = loggerImport.PrefixInf;
             PrefixSuc = loggerImport.PrefixSuc;
@@ -209,17 +213,20 @@ namespace BigLog
                 setDefaultColors_fallback();
             }
         }
+        // level-dev
         public static readonly ConsoleColor ColorInf_default = ConsoleColor.White;
         public static readonly ConsoleColor ColorSuc_default = ConsoleColor.Green;
         public static readonly ConsoleColor ColorWar_default = ConsoleColor.Yellow;
         public static readonly ConsoleColor ColorErr_default = ConsoleColor.Red;
         public static readonly ConsoleColor ColorCustom_default = ConsoleColor.Cyan;
 
+        // level-dev
         private ConsoleColor colorInf = ColorInf_default;
         private ConsoleColor colorSuc = ColorSuc_default;
         private ConsoleColor colorWar = ColorWar_default;
         private ConsoleColor colorErr = ColorErr_default;
         private ConsoleColor colorCustom = ColorCustom_default;
+        // level-dev
         public ConsoleColor ColorInf { get => colorInf; set { colorInf = value; updateColorArr(); } }
         public ConsoleColor ColorSuc { get => colorSuc; set { colorSuc = value; updateColorArr(); } }
         public ConsoleColor ColorWar { get => colorWar; set { colorWar = value; updateColorArr(); } }
@@ -242,6 +249,7 @@ namespace BigLog
         }
         private void setDefaultColors()
         {
+            // level-dev
             ColorInf = ColorInf_default;
             ColorSuc = ColorSuc_default;
             ColorWar = ColorWar_default;
@@ -250,6 +258,7 @@ namespace BigLog
         }
         private void setDefaultColors_fallback()
         {
+            // level-dev
             ColorInf = color_fallback;
             ColorSuc = color_fallback;
             ColorWar = color_fallback;
@@ -265,23 +274,27 @@ namespace BigLog
         public string PrePrefix = PrePrefix_default;
 
         // level prefixes (short and long) + default values + remember the spaces :3
+        // level-dev
         public static readonly string PrefixInf_default_short = "inf: ";
         public static readonly string PrefixSuc_default_short = "suc: ";
         public static readonly string PrefixWar_default_short = "war: ";
         public static readonly string PrefixErr_default_short = "err: ";
         public static readonly string PrefixCustom_default_short = "ctm: ";
 
+        // level-dev
         public static readonly string PrefixInf_default_long = "info: ";
         public static readonly string PrefixSuc_default_long = "success: ";
         public static readonly string PrefixWar_default_long = "warning: ";
         public static readonly string PrefixErr_default_long = "error: ";
         public static readonly string PrefixCustom_default_long = "custom: ";
 
+        // level-dev
         private string prefixInf = PrefixInf_default_short;
         private string prefixSuc = PrefixSuc_default_short;
         private string prefixWar = PrefixWar_default_short;
         private string prefixErr = PrefixErr_default_short;
         private string prefixCustom = PrefixCustom_default_short;
+        // level-dev
         public string PrefixInf { get => prefixInf; set { prefixInf = value; updatePrefixArr(); } }
         public string PrefixSuc { get => prefixSuc; set { prefixSuc = value; updatePrefixArr(); } }
         public string PrefixWar { get => prefixWar; set { prefixWar = value; updatePrefixArr(); } }
@@ -310,6 +323,7 @@ namespace BigLog
         public string TimeStampPrefix = "log: "; // string before timestamp + remember the space ^^
         private void setPrefix_short()
         {
+            // level-dev
             PrefixInf = PrefixInf_default_short;
             PrefixSuc = PrefixSuc_default_short;
             PrefixWar = PrefixWar_default_short;
@@ -318,6 +332,7 @@ namespace BigLog
         }
         private void setPrefix_long()
         {
+            // level-dev
             PrefixInf = PrefixInf_default_long;
             PrefixSuc = PrefixSuc_default_long;
             PrefixWar = PrefixWar_default_long;
@@ -326,6 +341,7 @@ namespace BigLog
         }
         private void updateColorArr()
         {
+            // level-dev
             ColorArr = [
                 ColorInf,
                 ColorSuc,
@@ -336,6 +352,7 @@ namespace BigLog
         }
         private void updatePrefixArr()
         {
+            // level-dev
             prefixArr = [
                 PrefixInf,
                 PrefixSuc,
@@ -415,6 +432,7 @@ namespace BigLog
         /////////////////////
 
         // text logging functions
+        // level-dev
         public void Inf(string text)
         {
             if (!autoFlush) { AddToCache(text, 0); }
@@ -462,6 +480,7 @@ namespace BigLog
         }
 
         // exception logging functions
+        // level-dev
         public void Inf(Exception ex)
         {
             if (!autoFlush) { AddToCache(ex.Message, 0); }
