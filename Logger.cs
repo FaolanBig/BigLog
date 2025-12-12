@@ -108,11 +108,28 @@ namespace BigLog
             Custom = 8
         }
 
-        private LogLevel minLogLevel = LogLevel.Trace; // minimum log level as default minimal log level
+        internal LogLevel minLogLevel = LogLevel.Trace; // minimum log level as default minimal log level, applies to both terminal and file output unless specified otherwise
         public LogLevel MinLogLevel
         {
             get { return minLogLevel; }
-            set { minLogLevel = value; }
+            set 
+            {
+                minLogLevel = value; 
+                minLogLevelTerminal = value;
+                minLogLevelFile = value;
+            }
+        }
+        internal LogLevel minLogLevelTerminal = LogLevel.Trace; // minimum log level for terminal output
+        public LogLevel MinLogLevelTerminal
+        {
+            get { return minLogLevelTerminal; }
+            set { minLogLevelTerminal = value; }
+        }
+        internal LogLevel minLogLevelFile = LogLevel.Trace; // minimum log level for file output
+        public LogLevel MinLogLevelFile
+        {
+            get { return minLogLevelFile; }
+            set { minLogLevelFile = value; }
         }
 
         private bool autoFlush = true; // flush every time something gets passed to BigLog. If disabled, BigLog will only flush if loggerObj.flush() is called. In the meantime logs will be stored in cache
@@ -521,7 +538,10 @@ namespace BigLog
         {
             cache.Clear();
         }
-        public void AddToCache(string text, int level) { cache.Add(OutputFormatter.GetString(this, text, level)); } // adds text to cache and formatts them int he set manner and adds timestamps
+        public void AddToCache(string text, LogLevel level) 
+        {
+            cache.Add(OutputFormatter.GetString(this, text, level)); // adds text to cache and formatts them int he set manner and adds timestamps
+        }
         public void flushCache() // use this function to flush the cached logs to the logging file and/or the terminal output
         {
             if (LogToTerminal) { PrintToTerminal.ToTerm(this, cache); }
@@ -537,83 +557,83 @@ namespace BigLog
         // level-dev
         public void Trc(string text)
         {
-            if (!autoFlush) { AddToCache(text, 0); }
+            if (!autoFlush) { AddToCache(text, LogLevel.Trace); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 0); }
-                if (LogToFile) { PrintToFile.ToFile(this, text, 0); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, LogLevel.Trace); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, LogLevel.Trace); }
             }
         }
         public void Dbg(string text)
         {
-            if (!autoFlush) { AddToCache(text, 1); }
+            if (!autoFlush) { AddToCache(text, LogLevel.Debug); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 1); }
-                if (LogToFile) { PrintToFile.ToFile(this, text, 1); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, LogLevel.Debug); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, LogLevel.Debug); }
             }
         }
         public void Inf(string text)
         {
-            if (!autoFlush) { AddToCache(text, 2); }
+            if (!autoFlush) { AddToCache(text, LogLevel.Info); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 2); }
-                if (LogToFile) { PrintToFile.ToFile(this, text, 2); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, LogLevel.Info); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, LogLevel.Info); }
             }
         }
         public void Suc(string text)
         {
-            if (!autoFlush) { AddToCache(text, 3); }
+            if (!autoFlush) { AddToCache(text, LogLevel.Success); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 3); }
-                if (LogToFile) { PrintToFile.ToFile(this, text, 3); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, LogLevel.Success); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, LogLevel.Success); }
             }
         }
         public void War(string text)
         {
-            if (!autoFlush) { AddToCache(text, 4); }
+            if (!autoFlush) { AddToCache(text, LogLevel.Warning); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 4); }
-                if (LogToFile) { PrintToFile.ToFile(this, text, 4); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, LogLevel.Warning); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, LogLevel.Warning); }
             }
         }
         public void Err(string text)
         {
-            if (!autoFlush) { AddToCache(text, 5); }
+            if (!autoFlush) { AddToCache(text, LogLevel.Error); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 5); }
-                if (LogToFile) { PrintToFile.ToFile(this, text, 5); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, LogLevel.Error); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, LogLevel.Error); }
             }
         }
         public void Ctc(string text)
         {
-            if (!autoFlush) { AddToCache(text, 6); }
+            if (!autoFlush) { AddToCache(text, LogLevel.Critical); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 6); }
-                if (LogToFile) { PrintToFile.ToFile(this, text, 6); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, LogLevel.Critical); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, LogLevel.Critical); }
             }
         }
         public void Fat(string text)
         {
-            if (!autoFlush) { AddToCache(text, 7); }
+            if (!autoFlush) { AddToCache(text, LogLevel.Fatal); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 7); }
-                if (LogToFile) { PrintToFile.ToFile(this, text, 7); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, LogLevel.Fatal); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, LogLevel.Fatal); }
             }
         }
         public void Ctm(string text)
         {
-            if (!autoFlush) { AddToCache(text, 8); }
+            if (!autoFlush) { AddToCache(text, LogLevel.Custom); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, 8); }
-                if (LogToFile) { PrintToFile.ToFile(this, text, 8); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, text, LogLevel.Custom); }
+                if (LogToFile) { PrintToFile.ToFile(this, text, LogLevel.Custom); }
             }
         }
 
@@ -659,83 +679,83 @@ namespace BigLog
         // level-dev
         public void Trc(Exception ex)
         {
-            if (!autoFlush) { AddToCache(ex.Message, 0); }
+            if (!autoFlush) { AddToCache(ex.Message, LogLevel.Trace); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 0); }
-                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 0); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, LogLevel.Trace); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, LogLevel.Trace); }
             }
         }
         public void Dbg(Exception ex)
         {
-            if (!autoFlush) { AddToCache(ex.Message, 1); }
+            if (!autoFlush) { AddToCache(ex.Message, LogLevel.Debug); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 1); }
-                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 1); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, LogLevel.Debug); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, LogLevel.Debug); }
             }
         }
         public void Inf(Exception ex)
         {
-            if (!autoFlush) { AddToCache(ex.Message, 2); }
+            if (!autoFlush) { AddToCache(ex.Message, LogLevel.Info); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 2); }
-                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 2); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, LogLevel.Info); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, LogLevel.Info); }
             }
         }
         public void Suc(Exception ex)
         {
-            if (!autoFlush) { AddToCache(ex.Message, 3); }
+            if (!autoFlush) { AddToCache(ex.Message, LogLevel.Success); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 3); }
-                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 3); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, LogLevel.Success); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, LogLevel.Success); }
             }
         }
         public void War(Exception ex)
         {
-            if (!autoFlush) { AddToCache(ex.Message, 4); }
+            if (!autoFlush) { AddToCache(ex.Message, LogLevel.Warning); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 4); }
-                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 4); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, LogLevel.Warning); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, LogLevel.Warning); }
             }
         }
         public void Err(Exception ex)
         {
-            if (!autoFlush) { AddToCache(ex.Message, 5); }
+            if (!autoFlush) { AddToCache(ex.Message, LogLevel.Error); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 5); }
-                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 5); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, LogLevel.Error); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, LogLevel.Error); }
             }
         }
         public void Ctc(Exception ex)
         {
-            if (!autoFlush) { AddToCache(ex.Message, 6); }
+            if (!autoFlush) { AddToCache(ex.Message, LogLevel.Critical); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 6); }
-                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 6); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, LogLevel.Critical); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, LogLevel.Critical); }
             }
         }
         public void Fat(Exception ex)
         {
-            if (!autoFlush) { AddToCache(ex.Message, 7); }
+            if (!autoFlush) { AddToCache(ex.Message, LogLevel.Fatal); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 7); }
-                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 7); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, LogLevel.Fatal); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, LogLevel.Fatal); }
             }
         }
         public void Ctm(Exception ex)
         {
-            if (!autoFlush) { AddToCache(ex.Message, 8); }
+            if (!autoFlush) { AddToCache(ex.Message, LogLevel.Custom); }
             else
             {
-                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, 8); }
-                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, 8); }
+                if (LogToTerminal) { PrintToTerminal.ToTerm(this, ex.Message, LogLevel.Custom); }
+                if (LogToFile) { PrintToFile.ToFile(this, ex.Message, LogLevel.Custom); }
             }
         }
 
