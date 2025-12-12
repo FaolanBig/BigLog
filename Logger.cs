@@ -82,6 +82,38 @@ namespace BigLog
         ////////////////////
         /// GENERAL-ZONE ///
         ////////////////////
+        
+        /*public static readonly int LevelCount = 9; // total number of log levels available (used for array sizes and such)
+
+        public static readonly int LevelTrc = 0;
+        public static readonly int LevelDbg = 1;
+        public static readonly int LevelInf = 2;
+        public static readonly int LevelSuc = 3;
+        public static readonly int LevelWar = 4;
+        public static readonly int LevelErr = 5;
+        public static readonly int LevelCtc = 6;
+        public static readonly int LevelFat = 7;
+        public static readonly int LevelCustom = 8;*/
+
+        public enum LogLevel
+        {
+            Trace = 0,
+            Debug = 1,
+            Info = 2,
+            Success = 3,
+            Warning = 4,
+            Error = 5,
+            Critical = 6,
+            Fatal = 7,
+            Custom = 8
+        }
+
+        private LogLevel minLogLevel = LogLevel.Trace; // minimum log level as default minimal log level
+        public LogLevel MinLogLevel
+        {
+            get { return minLogLevel; }
+            set { minLogLevel = value; }
+        }
 
         private bool autoFlush = true; // flush every time something gets passed to BigLog. If disabled, BigLog will only flush if loggerObj.flush() is called. In the meantime logs will be stored in cache
         public bool AutoFlush
