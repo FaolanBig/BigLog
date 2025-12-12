@@ -313,7 +313,7 @@ namespace BigLog
         public ConsoleColor ColorCustom { get => colorCustom; set { colorCustom = value; updateColorArr(); } }
 
 
-        internal ConsoleColor[] ColorArr = new ConsoleColor[5];
+        internal ConsoleColor[] ColorArr = new ConsoleColor[9];
 
         private bool enableDefaultColors = true;
         public bool EnableDefaultColors
@@ -405,7 +405,7 @@ namespace BigLog
         public string PrefixCustom { get => prefixCustom; set { prefixCustom = value; updatePrefixArr(); } }
 
 
-        internal string[] prefixArr = new string[5];
+        internal string[] prefixArr = new string[9];
 
         private bool useShortPrefix = true;
         public bool UseShortPrefix
@@ -540,6 +540,7 @@ namespace BigLog
         }
         public void AddToCache(string text, LogLevel level) 
         {
+            if (level < MinLogLevel) { return; } // check if the log level is above or equal to the set minimum log level
             cache.Add(OutputFormatter.GetString(this, text, level)); // adds text to cache and formatts them int he set manner and adds timestamps
         }
         public void flushCache() // use this function to flush the cached logs to the logging file and/or the terminal output

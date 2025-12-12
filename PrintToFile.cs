@@ -34,23 +34,21 @@ namespace BigLog
         }
         internal static void ToFile(Logger loggerImport, string text, Logger.LogLevel level) 
         {
-            if (level >= loggerImport.minLogLevelFile)
+            if (level < loggerImport.minLogLevelFile) { return; }
+            FileStream fileStream = null;
+            try
             {
-                FileStream fileStream = null;
-                try
+                fileStream = new FileStream(Path.GetFullPath(loggerImport.FileName), FileMode.Append);
+                using (StreamWriter writer = new StreamWriter(fileStream, loggerImport.UseDefaultEncoding ? Encoding.Default : loggerImport.Encoding))
                 {
-                    fileStream = new FileStream(Path.GetFullPath(loggerImport.FileName), FileMode.Append);
-                    using (StreamWriter writer = new StreamWriter(fileStream, loggerImport.UseDefaultEncoding ? Encoding.Default : loggerImport.Encoding))
-                    {
-                        writer.WriteLine(OutputFormatter.GetString(loggerImport, text, level));
-                    }
+                    writer.WriteLine(OutputFormatter.GetString(loggerImport, text, level));
                 }
-                finally
+            }
+            finally
+            {
+                if (fileStream != null)
                 {
-                    if (fileStream != null)
-                    {
-                        fileStream.Close();
-                    }
+                    fileStream.Close();
                 }
             }
         }
