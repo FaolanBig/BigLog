@@ -68,14 +68,20 @@ catch (Exception ex)
 
 ### General
 
-| Property             | Type       | Description                                                                                          | Default            |
-| -------------------- | ---------- | ---------------------------------------------------------------------------------------------------- | ------------------ |
-| `AutoFlush`          | `bool`     | If `true`, logs are written immediately. If `false`, logs are cached until `flushCache()` is called. | `true`             |
-| `LogToTerminal`      | `bool`     | Enables console output.                                                                              | `true`             |
-| `LogToFile`          | `bool`     | Enables file output.                                                                                 | `false`            |
-| `FileName`           | `string`   | File path for logging.                                                                               | `"log.txt"`        |
-| `UseDefaultEncoding` | `bool`     | Use system default encoding.                                                                         | `true`             |
-| `Encoding`           | `Encoding` | Custom encoding (disables `UseDefaultEncoding`).                                                     | `Encoding.Default` |
+| Property             | Type       | Description                                                                                                      | Default            |
+| -------------------- | ---------- | ----------------------------------------------------------------------------------------------------             | ------------------ |
+| `AutoFlush`          | `bool`     | If `true`, logs are written immediately. If `false`, logs are cached until `flushCache()` is called.             | `true`             |
+| `LogToTerminal`      | `bool`     | Enables console output.                                                                                          | `true`             |
+| `LogToFile`          | `bool`     | Enables file output.                                                                                             | `false`            |
+| `FileName`           | `string`   | File path for logging.                                                                                           | `"log.txt"`        |
+| `UseDefaultEncoding` | `bool`     | Use system default encoding.                                                                                     | `true`             |
+| `Encoding`           | `Encoding` | Custom encoding (disables `UseDefaultEncoding`).                                                                 | `Encoding.Default` |
+| `MinLogLevel`        | `LogLevel` | Global minimum log level. Applies to both terminal and file unless overridden by the more specific properties.   | `LogLevel.Trace`   |
+| `MinLogLevelTerminal`| `LogLevel` | Minimum log level specifically for terminal output.                                                              | `LogLevel.Trace`   |
+| `MinLogLevelFile`    | `LogLevel` | Minimum log level specifically for file output.                                                                  | `LogLevel.Trace`   |
+> :information_source: Log levels in increasing order are: Trace < Debug < Info < Success < Warning < Error < Critical < Fatal < Custom
+>
+> :information_source: Changing `MinLogLevel` sets both `MinLogLevelTerminal` and `MinLogLevelFile` to the same value.
 
 ---
 
