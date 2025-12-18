@@ -3,7 +3,11 @@
 **BigLog** is a flexible logging library for C#.
 It supports output to **console** and **file**, with configurable prefixes, timestamps, log levels, and optional colors.
 
-**Important:** Colors are **only applied to console output**. When logging to a file or using the cache, colored output is **disabled**. If cache logging is flushed to the terminal, `Color_fallback` is used.
+> :information_source: Colors are **only applied to console output**. When logging to a file or using the cache, colored output is **disabled**. If cache logging is flushed to the terminal, `Color_fallback` is used.
+
+> :information_source: By default, all log levels are enabled. You can set minimum log levels for both terminal and file outputs to filter messages.
+
+> :information_source: Logging to services like **Azure Application Insights** or **Seq** is not supported in this version but it is under development.
 
 ---
 
@@ -35,13 +39,17 @@ class Program
 
 ## Log Levels
 
-| Method  | Meaning     | Example Output                                         |
-| ------- | ----------- | ------------------------------------------------------ |
-| `Inf()` | Information | `log: 2025-11-05 13:30:01.1234 :: inf: Server started` |
-| `Suc()` | Success     | `log: ... :: suc: File saved`                          |
-| `War()` | Warning     | `log: ... :: war: Low disk space`                      |
-| `Err()` | Error       | `log: ... :: err: Connection failed`                   |
-| `Ctm()` | Custom      | `log: ... :: ctm: Test output`                         |
+| Method  | Method long  | Meaning       | Example Output                                           |
+| ------- | ------------ | ------------- | -------------------------------------------------------- |
+| `Trc()` | `Trace()`    | Trace         | `log: 2025-11-05 13:30:01.1234 :: trc: Initializing...`  |
+| `Dbg()` | `Debug()`    | Debug         | `log: ... :: dbg: Variable x = 42`                       |
+| `Inf()` | `Info()`     | Information   | `log: ... :: inf: Server started`                        |
+| `Suc()` | `Success()`  | Success       | `log: ... :: suc: File saved`                            |
+| `War()` | `Warning()`  | Warning       | `log: ... :: war: Low disk space`                        |
+| `Err()` | `Error()`    | Error         | `log: ... :: err: Connection failed`                     |
+| `Ctc()` | `Critical()` | Critical      | `log: ... :: ctc: System integrity compromised`          |
+| `Fat()` | `Fatal()`    | Fatal         | `log: ... :: fat: Unrecoverable failure`                 |
+| `Ctm()` | `Custom()`   | Custom        | `log: ... :: ctm: Test output`                           |
 
 All methods accept either a `string` or an `Exception`.
 
@@ -64,14 +72,20 @@ catch (Exception ex)
 
 ### General
 
-| Property             | Type       | Description                                                                                          | Default            |
-| -------------------- | ---------- | ---------------------------------------------------------------------------------------------------- | ------------------ |
-| `AutoFlush`          | `bool`     | If `true`, logs are written immediately. If `false`, logs are cached until `flushCache()` is called. | `true`             |
-| `LogToTerminal`      | `bool`     | Enables console output.                                                                              | `true`             |
-| `LogToFile`          | `bool`     | Enables file output.                                                                                 | `false`            |
-| `FileName`           | `string`   | File path for logging.                                                                               | `"log.txt"`        |
-| `UseDefaultEncoding` | `bool`     | Use system default encoding.                                                                         | `true`             |
-| `Encoding`           | `Encoding` | Custom encoding (disables `UseDefaultEncoding`).                                                     | `Encoding.Default` |
+| Property             | Type       | Description                                                                                                      | Default            |
+| -------------------- | ---------- | ----------------------------------------------------------------------------------------------------             | ------------------ |
+| `AutoFlush`          | `bool`     | If `true`, logs are written immediately. If `false`, logs are cached until `flushCache()` is called. Set `false` for high performance logging.             | `true`             |
+| `LogToTerminal`      | `bool`     | Enables console output.                                                                                          | `true`             |
+| `LogToFile`          | `bool`     | Enables file output.                                                                                             | `false`            |
+| `FileName`           | `string`   | File path for logging.                                                                                           | `"log.txt"`        |
+| `UseDefaultEncoding` | `bool`     | Use system default encoding.                                                                                     | `true`             |
+| `Encoding`           | `Encoding` | Custom encoding (disables `UseDefaultEncoding`).                                                                 | `Encoding.Default` |
+| `MinLogLevel`        | `LogLevel` | Global minimum log level. Applies to both terminal and file unless overridden by the more specific properties.   | `LogLevel.Trace`   |
+| `MinLogLevelTerminal`| `LogLevel` | Minimum log level specifically for terminal output.                                                              | `LogLevel.Trace`   |
+| `MinLogLevelFile`    | `LogLevel` | Minimum log level specifically for file output.                                                                  | `LogLevel.Trace`   |
+> :information_source: Log levels in increasing order are: Trace < Debug < Info < Success < Warning < Error < Critical < Fatal < Custom
+>
+> :information_source: Changing `MinLogLevel` sets both `MinLogLevelTerminal` and `MinLogLevelFile` to the same value.
 
 ---
 
@@ -92,10 +106,14 @@ catch (Exception ex)
 
 | Log Type | Short  | Long       |
 | -------- | ------ | ---------- |
+| Trace    | `trc:` | `trace: `  |
+| Debug    | `dbg:` | `debug:`   |
 | Info     | `inf:` | `info:`    |
 | Success  | `suc:` | `success:` |
 | Warning  | `war:` | `warning:` |
 | Error    | `err:` | `error:`   |
+| Critical | `ctc:` | `critical:`|
+| Fatal    | `fat:` | `fatal:`   |
 | Custom   | `ctm:` | `custom:`  |
 
 Example:
@@ -119,13 +137,17 @@ logger.PrefixErr = "[ERROR] ";
 
 **Default colors per level (console only):**
 
-| Level   | Color    |
-| ------- | -------- |
-| Info    | `White`  |
-| Success | `Green`  |
-| Warning | `Yellow` |
-| Error   | `Red`    |
-| Custom  | `Cyan`   |
+| Level   | Color     |
+| ------- | --------  |
+| Trace   | `Gray`    |
+| Debug   | `Grey`    |
+| Info    | `White`   |
+| Success | `Green`   |
+| Warning | `Yellow`  |
+| Error   | `Magenta` |
+| Critical| `Red`     |
+| Fatal   | `DarkRed` |
+| Custom  | `Cyan`    |
 
 > Note: Colors **cannot be used** when logging to a file or when messages are cached.
 > When cached messages are flushed to the terminal, `Color_fallback` is applied.
@@ -205,3 +227,11 @@ See [LICENSE](./LICENSE.txt) for details.
 ## Copyright Notice
 
 Copyright © 2025 by Carl Öttinger
+
+## Contact
+
+You can contact me via email at [carl@oettinger.cloud](carl@oettinger.cloud) or visit my website at [bigvault.cloud](https://bigvault.cloud).
+
+## Contributing
+
+Contributions are welcome! Please open issues or pull requests on the [GitHub repository](https://github.com/faolanbig/biglog).

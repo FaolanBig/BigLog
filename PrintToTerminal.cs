@@ -9,16 +9,18 @@ namespace BigLog
     internal class PrintToTerminal
     {
         // level: 0 = inf, 1 = success, 2 = warning, 3 = error, 4 = custom
-        internal static void ToTerm(Logger loggerImport, string text, int level)
+        internal static void ToTerm(Logger loggerImport, string text, Logger.LogLevel level)
         {
+            if (level < loggerImport.minLogLevelFile) { return; }
+
             string output = loggerImport.TimeStampPrefix;
             output += DateTime.Now.ToString(loggerImport.TimeFormat);
             output += loggerImport.PrePrefix;
             if (loggerImport.ColorAll)
             {
-                output += loggerImport.prefixArr[level];
+                output += loggerImport.prefixArr[(int)level];
                 output += text;
-                Console.ForegroundColor = loggerImport.ColorArr[level];
+                Console.ForegroundColor = loggerImport.ColorArr[(int)level];
                 Console.WriteLine(output);
             }
             else
@@ -48,9 +50,9 @@ namespace BigLog
                     Console.WriteLine(text);
                 }*/
 
-                Console.ForegroundColor = loggerImport.ColorLevelPrefix ? loggerImport.ColorArr[level] : loggerImport.Color_fallback;
-                Console.Write(loggerImport.prefixArr[level]);
-                Console.ForegroundColor = loggerImport.ColorMessage ? loggerImport.ColorArr[level] : loggerImport.Color_fallback;
+                Console.ForegroundColor = loggerImport.ColorLevelPrefix ? loggerImport.ColorArr[(int)level] : loggerImport.Color_fallback;
+                Console.Write(loggerImport.prefixArr[(int)level]);
+                Console.ForegroundColor = loggerImport.ColorMessage ? loggerImport.ColorArr[(int)level] : loggerImport.Color_fallback;
                 Console.WriteLine(text);
             }
         }

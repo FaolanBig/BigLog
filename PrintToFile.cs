@@ -32,8 +32,9 @@ namespace BigLog
                 }
             }
         }
-        internal static void ToFile(Logger loggerImport, string text, int level) 
+        internal static void ToFile(Logger loggerImport, string text, Logger.LogLevel level) 
         {
+            if (level < loggerImport.minLogLevelFile) { return; }
             FileStream fileStream = null;
             try
             {
@@ -45,9 +46,9 @@ namespace BigLog
             }
             finally
             {
-                if (fileStream != null) 
-                { 
-                    fileStream.Close(); 
+                if (fileStream != null)
+                {
+                    fileStream.Close();
                 }
             }
         }
