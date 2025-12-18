@@ -106,10 +106,14 @@ catch (Exception ex)
 
 | Log Type | Short  | Long       |
 | -------- | ------ | ---------- |
+| Trace    | `trc:` | `trace: `  |
+| Debug    | `dbg:` | `debug:`   |
 | Info     | `inf:` | `info:`    |
 | Success  | `suc:` | `success:` |
 | Warning  | `war:` | `warning:` |
 | Error    | `err:` | `error:`   |
+| Critical | `ctc:` | `critical:`|
+| Fatal    | `fat:` | `fatal:`   |
 | Custom   | `ctm:` | `custom:`  |
 
 Example:
@@ -133,13 +137,17 @@ logger.PrefixErr = "[ERROR] ";
 
 **Default colors per level (console only):**
 
-| Level   | Color    |
-| ------- | -------- |
-| Info    | `White`  |
-| Success | `Green`  |
-| Warning | `Yellow` |
-| Error   | `Red`    |
-| Custom  | `Cyan`   |
+| Level   | Color     |
+| ------- | --------  |
+| Trace   | `Gray`    |
+| Debug   | `Grey`    |
+| Info    | `White`   |
+| Success | `Green`   |
+| Warning | `Yellow`  |
+| Error   | `Magenta` |
+| Critical| `Red`     |
+| Fatal   | `DarkRed` |
+| Custom  | `Cyan`    |
 
 > Note: Colors **cannot be used** when logging to a file or when messages are cached.
 > When cached messages are flushed to the terminal, `Color_fallback` is applied.
@@ -219,3 +227,11 @@ See [LICENSE](./LICENSE.txt) for details.
 ## Copyright Notice
 
 Copyright © 2025 by Carl Öttinger
+
+## Contact
+
+You can contact me via email at [carl@oettinger.cloud](carl@oettinger.cloud) or visit my website at [bigvault.cloud](https://bigvault.cloud).
+
+## Contributing
+
+Contributions are welcome! Please open issues or pull requests on the [GitHub repository](https://github.com/faolanbig/biglog).

@@ -286,8 +286,8 @@ namespace BigLog
         public static readonly ConsoleColor ColorInf_default = ConsoleColor.White;
         public static readonly ConsoleColor ColorSuc_default = ConsoleColor.Green;
         public static readonly ConsoleColor ColorWar_default = ConsoleColor.Yellow;
-        public static readonly ConsoleColor ColorErr_default = ConsoleColor.Red;
-        public static readonly ConsoleColor ColorCtc_default = ConsoleColor.Magenta;
+        public static readonly ConsoleColor ColorErr_default = ConsoleColor.Magenta;
+        public static readonly ConsoleColor ColorCtc_default = ConsoleColor.Red;
         public static readonly ConsoleColor ColorFat_default = ConsoleColor.DarkRed;
         public static readonly ConsoleColor ColorCustom_default = ConsoleColor.Cyan;
 
