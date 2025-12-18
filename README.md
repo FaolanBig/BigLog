@@ -5,6 +5,10 @@ It supports output to **console** and **file**, with configurable prefixes, time
 
 > :information_source: Colors are **only applied to console output**. When logging to a file or using the cache, colored output is **disabled**. If cache logging is flushed to the terminal, `Color_fallback` is used.
 
+> :information_source: By default, all log levels are enabled. You can set minimum log levels for both terminal and file outputs to filter messages.
+
+> :information_source: Logging to services like **Azure Application Insights** or **Seq** is not supported in this version but it is under development.
+
 ---
 
 ## Quick Start
