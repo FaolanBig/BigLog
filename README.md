@@ -74,7 +74,7 @@ catch (Exception ex)
 
 | Property             | Type       | Description                                                                                                      | Default            |
 | -------------------- | ---------- | ----------------------------------------------------------------------------------------------------             | ------------------ |
-| `AutoFlush`          | `bool`     | If `true`, logs are written immediately. If `false`, logs are cached until `flushCache()` is called.             | `true`             |
+| `AutoFlush`          | `bool`     | If `true`, logs are written immediately. If `false`, logs are cached until `flushCache()` is called. Set `false` for high performance logging.             | `true`             |
 | `LogToTerminal`      | `bool`     | Enables console output.                                                                                          | `true`             |
 | `LogToFile`          | `bool`     | Enables file output.                                                                                             | `false`            |
 | `FileName`           | `string`   | File path for logging.                                                                                           | `"log.txt"`        |
