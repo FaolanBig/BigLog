@@ -3,7 +3,7 @@
 **BigLog** is a flexible logging library for C#.
 It supports output to **console** and **file**, with configurable prefixes, timestamps, log levels, and optional colors.
 
-**Important:** Colors are **only applied to console output**. When logging to a file or using the cache, colored output is **disabled**. If cache logging is flushed to the terminal, `Color_fallback` is used.
+> :information_source: Colors are **only applied to console output**. When logging to a file or using the cache, colored output is **disabled**. If cache logging is flushed to the terminal, `Color_fallback` is used.
 
 ---
 
@@ -35,17 +35,17 @@ class Program
 
 ## Log Levels
 
-| Method  | Meaning       | Example Output                                           |
-| ------- | ------------- | -------------------------------------------------------- |
-| `Trc()` | Trace         | `log: 2025-11-05 13:30:01.1234 :: trc: Initializing...`  |
-| `Dbg()` | Debug         | `log: ... :: dbg: Variable x = 42`                       |
-| `Inf()` | Information   | `log: ... :: inf: Server started`                        |
-| `Suc()` | Success       | `log: ... :: suc: File saved`                            |
-| `War()` | Warning       | `log: ... :: war: Low disk space`                        |
-| `Err()` | Error         | `log: ... :: err: Connection failed`                     |
-| `Ctc()` | Critical      | `log: ... :: ctc: System integrity compromised`          |
-| `Fat()` | Fatal         | `log: ... :: fat: Unrecoverable failure`                 |
-| `Ctm()` | Custom        | `log: ... :: ctm: Test output`                           |
+| Method  | Method long  | Meaning       | Example Output                                           |
+| ------- | ------------ | ------------- | -------------------------------------------------------- |
+| `Trc()` | `Trace()`    | Trace         | `log: 2025-11-05 13:30:01.1234 :: trc: Initializing...`  |
+| `Dbg()` | `Debug()`    | Debug         | `log: ... :: dbg: Variable x = 42`                       |
+| `Inf()` | `Info()`     | Information   | `log: ... :: inf: Server started`                        |
+| `Suc()` | `Success()`  | Success       | `log: ... :: suc: File saved`                            |
+| `War()` | `Warning()`  | Warning       | `log: ... :: war: Low disk space`                        |
+| `Err()` | `Error()`    | Error         | `log: ... :: err: Connection failed`                     |
+| `Ctc()` | `Critical()` | Critical      | `log: ... :: ctc: System integrity compromised`          |
+| `Fat()` | `Fatal()`    | Fatal         | `log: ... :: fat: Unrecoverable failure`                 |
+| `Ctm()` | `Custom()`   | Custom        | `log: ... :: ctm: Test output`                           |
 
 All methods accept either a `string` or an `Exception`.
 
