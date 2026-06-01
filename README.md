@@ -11,6 +11,18 @@ It supports output to **console** and **file**, with configurable prefixes, time
 
 ---
 
+## Installation
+
+```csharp
+dotnet add package BigLog
+```
+
+```csharp
+nuget install BigLog
+```
+
+---
+
 ## Quick Start
 
 ```csharp
